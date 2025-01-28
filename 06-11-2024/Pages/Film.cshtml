@@ -1,0 +1,34 @@
+﻿@page
+@model _06_11_2024.Pages.FilmModel
+
+<div class="row mt-3">
+	<div class="col-6 offset-3">
+		<a asp-page="Index">Назад</a>
+		<table class="table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">Название</th>
+					<th scope="col">Режиссер</th>
+					<th scope="col">Жанр</th>
+					<th scope="col">Краткое описание</th>
+					<th scope="col">Список сеансов</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>@Model.film.Name</td>
+					<td>@Model.film.Director</td>
+					<td>@Model.film.Jenre</td>
+					<td>@Model.film.Description</td>
+					<td>
+						@foreach (var s in Model.film.Sessions)
+						{
+							<div>@s.Date.ToShortDateString()</div>
+						}
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</div>
