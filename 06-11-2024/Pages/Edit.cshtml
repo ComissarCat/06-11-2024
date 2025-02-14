@@ -1,0 +1,45 @@
+﻿@page
+@model _06_11_2024.Pages.EditModel
+
+<div class="row mt-3">
+	<div class="col-6 offset-3">
+		<form asp-page="Edit" method="post">
+			<input type="hidden" name="id" value="@Model.film.Id" />
+			<div class="row">
+				<div class="col-3">
+					<label for="Name" class="form-label">Название</label>
+				</div>
+				<div class="col-9">
+					<input class="form-control" type="text" name="name" value="@Model.film.Name" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<label for="Director" class="form-label">Режиссёр</label>
+				</div>
+				<div class="col-9">
+					<input class="form-control" type="text" name="director" value="@Model.film.Director" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<label for="Jenre" class="form-label">Жанр</label>
+				</div>
+				<div class="col-9">
+					<input class="form-control" type="text" name="jenre" value="@Model.film.Jenre" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<label for="Description" class="form-label">Описание</label>
+				</div>
+				<div class="col-9">
+					<input class="form-control" type="text" name="description" value="@Model.film.Description" />
+				</div>
+			</div>
+			<div class="row">
+				<input class="btn-primary" type="submit" value="Сохранить" />
+			</div>
+		</form>
+	</div>
+</div>

@@ -2,7 +2,7 @@
 @model _06_11_2024.Pages.FilmModel
 
 <div class="row mt-3">
-	<div class="col-6 offset-3">
+	<div class="col">
 		<a asp-page="Index">Назад</a>
 		<table class="table table-striped table-bordered">
 			<thead>
@@ -21,14 +21,62 @@
 					<td>@Model.film.Jenre</td>
 					<td>@Model.film.Description</td>
 					<td>
-						@foreach (var s in Model.film.Sessions)
-						{
-							<div>@s.Date.ToShortDateString()</div>
-						}
+						@if (Model.film.Sessions is not null)
+							@foreach (var s in Model.film.Sessions)
+							{
+								<div>@s.Date.ToShortDateString()</div>
+							}
+					</td>
+					<td>
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sessionModal">
+							Добавить сеанс
+						</button>
+					</td>
+					<td>
+						<a asp-page="Edit" asp-route-id=@Model.film.Id>
+							Редактировать
+						</a>
+					<td>
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+							Удалить
+						</button>
 					</td>
 				</tr>
-
 			</tbody>
 		</table>
+		<div class="modal fade" id="sessionModal" tabindex="-1" aria-labelledby="sessionModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form method="post" asp-page-handler="AddSession">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="sessionModalLabel">Выберите дату сеанса</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+						</div>
+						<div class="modal-body">
+							<input type="hidden" name="id" value="@Model.film.Id" />
+							<input class="form-control" type="date" name="date" />
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Нет, не надо</button>
+							<button type="submit" class="btn btn-primary">Да, добавить</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="deleteModalLabel">Действительно удалить?</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Нет, погодите</button>
+						<a asp-page-handler="Delete" asp-route-id=@Model.film.Id>Да, удалить</a>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace _06_11_2024
 {
 	public class Program
@@ -5,6 +7,11 @@ namespace _06_11_2024
 		public static void Main(string[] args)
 		{
 			var builder = WebApplication.CreateBuilder(args);
+
+			string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+			// добавляем контекст ApplicationContext в качестве сервиса в приложение
+			builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlite(connection));
 
 			// Add services to the container.
 			builder.Services.AddRazorPages();
